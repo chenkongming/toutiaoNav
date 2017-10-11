@@ -117,89 +117,85 @@ img{
   </div>
 </div>
 
+<script>
+    var pageSwiper = new Swiper('.swiper-container2', {
+        paginationClickable: true,
+        uniqueNavElements :false,
+        onSlideChangeStart: function(swiper){
+//            console.log(swiper.activeIndex)
+//            mySwiper.slideTo(swiper.activeIndex, 1000, false);
+            $("#topNav  .active").removeClass('active')
+            $("#topNav .swiper-slide").eq(swiper.activeIndex).addClass('active')
 
+            slide = mySwiper.slides[swiper.activeIndex];//获取当前的slide节点
+            slideLeft = slide.offsetLeft
+            slideWidth = slide.clientWidth
+            slideCenter = slideLeft + slideWidth / 2
+            // 被点击slide的中心点
+            console.log("============")
+            console.log("slideLeft:"+slideLeft)
+            console.log("maxWidth:"+maxWidth)
+            console.log("slideCenter:"+slideCenter)
+            console.log("swiperWidth / 2:"+swiperWidth / 2)
+            mySwiper.setWrapperTransition(300)
+            if (slideCenter < swiperWidth / 2) {
+                mySwiper.setWrapperTranslate(0)
+            } else if (slideCenter >maxWidth) {
+                mySwiper.setWrapperTranslate(maxTranslate)
+                console.log("maxTranslate:"+maxTranslate)
+            } else {
+                nowTlanslate = slideCenter - swiperWidth / 2
+                console.log(nowTlanslate)
+                mySwiper.setWrapperTranslate(-nowTlanslate)
+            }
+        }
+    });
+</script>
 
 
 <!--<img src="images/img02.png">-->
 <script type="text/javascript">
-   $(function () {
-       var pageSwiper = new Swiper('.swiper-container2', {
-           paginationClickable: true,
-           uniqueNavElements :false,
-           onSlideChangeStart: function(swiper){
-//            console.log(swiper.activeIndex)
-//            mySwiper.slideTo(swiper.activeIndex, 1000, false);
-               $("#topNav  .active").removeClass('active')
-               $("#topNav .swiper-slide").eq(swiper.activeIndex).addClass('active')
+var mySwiper = new Swiper('#topNav', {
+	freeMode: true,
+	freeModeMomentumRatio: 0.5,
+	slidesPerView: 'auto',
 
+});
 
-               slide = mySwiper.slides[swiper.activeIndex]
+swiperWidth = mySwiper.container[0].clientWidth
+maxTranslate = mySwiper.maxTranslate();
+maxWidth = -maxTranslate + swiperWidth / 2
 
-               slideLeft = slide.offsetLeft
-               slideWidth = slide.clientWidth
-               slideCenter = slideLeft + slideWidth / 2
-               // 被点击slide的中心点
-               console.log("============")
-               console.log("slideLeft:"+slideLeft)
-               console.log("maxWidth:"+maxWidth)
-               console.log("slideCenter:"+slideCenter)
-               console.log("swiperWidth / 2:"+swiperWidth / 2)
+$(".swiper-container").on('touchstart', function(e) {
+	e.preventDefault()
+})
 
-               mySwiper.setWrapperTransition(300)
-               if (slideCenter < swiperWidth / 2) {
-                   mySwiper.setWrapperTranslate(0)
-               } else if (slideCenter >maxWidth) {
-                   mySwiper.setWrapperTranslate(maxTranslate)
-                   console.log("maxTranslate:"+maxTranslate)
-               } else {
-                   nowTlanslate = slideCenter - swiperWidth / 2
-                   console.log(nowTlanslate)
-                   mySwiper.setWrapperTranslate(-nowTlanslate)
-               }
-           }
-       });
-       var mySwiper = new Swiper('#topNav', {
-           freeMode: true,
-           freeModeMomentumRatio: 0.5,
-           slidesPerView: 'auto',
+mySwiper.on('tap', function(swiper, e) {
+//    console.log(swiper.clickedIndex)
+    pageSwiper.slideTo(swiper.clickedIndex, 1000, false);//跳转
+//	e.preventDefault()
+	slide = swiper.slides[swiper.clickedIndex]
+	slideLeft = slide.offsetLeft
+	slideWidth = slide.clientWidth
+	slideCenter = slideLeft + slideWidth / 2
+    console.log("slideLeft:"+slideLeft)
+    console.log("maxWidth:"+maxWidth)
+    console.log("slideCenter:"+slideCenter)
+	// 被点击slide的中心点
+	mySwiper.setWrapperTransition(300)
+	if (slideCenter < swiperWidth / 2) {
+		mySwiper.setWrapperTranslate(0)
+	} else if (slideCenter > maxWidth) {
+		mySwiper.setWrapperTranslate(maxTranslate)
+	} else {
+		nowTlanslate = slideCenter - swiperWidth / 2
+		mySwiper.setWrapperTranslate(-nowTlanslate)
+	}
+	$("#topNav  .active").removeClass('active')
 
-       });
+	$("#topNav .swiper-slide").eq(swiper.clickedIndex).addClass('active')
 
-       swiperWidth = mySwiper.container[0].clientWidth
-       maxTranslate = mySwiper.maxTranslate();
-       maxWidth = -maxTranslate + swiperWidth / 2
-
-       $(".swiper-container").on('touchstart', function(e) {
-           e.preventDefault()
-       })
-
-       mySwiper.on('tap', function(swiper, e) {
-           //    console.log(swiper.clickedIndex)
-           pageSwiper.slideTo(swiper.clickedIndex, 1000, false);//跳转
-           //	e.preventDefault()
-           slide = swiper.slides[swiper.clickedIndex]
-           slideLeft = slide.offsetLeft
-           slideWidth = slide.clientWidth
-           slideCenter = slideLeft + slideWidth / 2
-           console.log("slideLeft:"+slideLeft)
-           console.log("maxWidth:"+maxWidth)
-           console.log("slideCenter:"+slideCenter)
-           // 被点击slide的中心点
-           mySwiper.setWrapperTransition(300)
-           if (slideCenter < swiperWidth / 2) {
-               mySwiper.setWrapperTranslate(0)
-           } else if (slideCenter > maxWidth) {
-               mySwiper.setWrapperTranslate(maxTranslate)
-           } else {
-               nowTlanslate = slideCenter - swiperWidth / 2
-               mySwiper.setWrapperTranslate(-nowTlanslate)
-           }
-           $("#topNav  .active").removeClass('active')
-
-           $("#topNav .swiper-slide").eq(swiper.clickedIndex).addClass('active')
-
-       })
-   })
+})
 </script>
 
 
