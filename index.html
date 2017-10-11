@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+<link rel="stylesheet" href="css/swiper.min.css">
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/swiper.min.js"></script>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+#topNav {
+	width: 100%;
+	overflow: hidden;
+	font: 16px/32px hiragino sans gb, microsoft yahei, simsun;
+	border-bottom:1px solid #f8f8f8;
+}
+#topNav .swiper-slide {
+	padding: 0 5px;
+	letter-spacing:2px;
+	width:3rem;
+	text-align:center;
+}
+#topNav .swiper-slide span{
+
+	transition:all .3s ease;
+	display:block;
+}
+#topNav .active span{
+	transform:scale(1.1);
+	color:#FF2D2D;
+}
+img{
+	width:100%;
+	line-height:0;
+	}
+.swiper-container2 {
+  width: 100%;
+  height: 90vh;
+}
+.swiper-container2 .swiper-slide{
+  background: yellow;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+</style>
+</head>
+<body>
+<!--<img src="images/img01.png">-->
+<div id="topNav" class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide active"><span>推荐</span></div>
+    <div class="swiper-slide"><span>热点</span></div>
+    <div class="swiper-slide"><span>深圳</span></div>
+    <div class="swiper-slide"><span>视频</span></div>
+    <div class="swiper-slide"><span>社会</span></div>
+    <div class="swiper-slide"><span>娱乐</span></div>
+    <div class="swiper-slide"><span>科技</span></div>
+    <div class="swiper-slide"><span>问答</span></div>
+    <div class="swiper-slide"><span>汽车</span></div>
+    <div class="swiper-slide"><span>财经</span></div>
+    <div class="swiper-slide"><span>军事</span></div>
+    <div class="swiper-slide"><span>体育</span></div>
+    <div class="swiper-slide"><span>段子</span></div>
+    <div class="swiper-slide"><span>美女</span></div>
+    <div class="swiper-slide"><span>国际</span></div>
+    <div class="swiper-slide"><span>趣图</span></div>
+    <div class="swiper-slide"><span>健康</span></div>
+    <div class="swiper-slide"><span>特产</span></div>
+    <div class="swiper-slide"><span>房产</span></div>
+  </div>
+</div>
+
+<!-- Swiper -->
+<div class="swiper-container2">
+  <div class="swiper-wrapper" >
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-slide">Slide 4</div>
+    <div class="swiper-slide">Slide 5</div>
+    <div class="swiper-slide">Slide 6</div>
+    <div class="swiper-slide">Slide 7</div>
+    <div class="swiper-slide">Slide 8</div>
+    <div class="swiper-slide">Slide 9</div>
+    <div class="swiper-slide">Slide 10</div>
+    <div class="swiper-slide">Slide 11</div>
+    <div class="swiper-slide">Slide 12</div>
+    <div class="swiper-slide">Slide 13</div>
+    <div class="swiper-slide">Slide 14</div>
+    <div class="swiper-slide">Slide 15</div>
+    <div class="swiper-slide">Slide 16</div>
+    <div class="swiper-slide">Slide 17</div>
+    <div class="swiper-slide">Slide 18</div>
+    <div class="swiper-slide">Slide 19</div>
+  </div>
+</div>
+
+<script>
+    var pageSwiper = new Swiper('.swiper-container2', {
+        paginationClickable: true,
+        uniqueNavElements :false,
+        onSlideChangeStart: function(swiper){
+//            console.log(swiper.activeIndex)
+//            mySwiper.slideTo(swiper.activeIndex, 1000, false);
+            $("#topNav  .active").removeClass('active')
+            $("#topNav .swiper-slide").eq(swiper.activeIndex).addClass('active')
+
+
+            slide = mySwiper.slides[swiper.activeIndex]
+
+            slideLeft = slide.offsetLeft
+            slideWidth = slide.clientWidth
+            slideCenter = slideLeft + slideWidth / 2
+            // 被点击slide的中心点
+            console.log("============")
+            console.log("slideLeft:"+slideLeft)
+            console.log("maxWidth:"+maxWidth)
+            console.log("slideCenter:"+slideCenter)
+            console.log("swiperWidth / 2:"+swiperWidth / 2)
+
+            mySwiper.setWrapperTransition(300)
+            if (slideCenter < swiperWidth / 2) {
+                mySwiper.setWrapperTranslate(0)
+            } else if (slideCenter >maxWidth) {
+                mySwiper.setWrapperTranslate(maxTranslate)
+                console.log("maxTranslate:"+maxTranslate)
+            } else {
+                nowTlanslate = slideCenter - swiperWidth / 2
+                console.log(nowTlanslate)
+                mySwiper.setWrapperTranslate(-nowTlanslate)
+            }
+        }
+    });
+</script>
+
+
+<!--<img src="images/img02.png">-->
+<script type="text/javascript">
+var mySwiper = new Swiper('#topNav', {
+	freeMode: true,
+	freeModeMomentumRatio: 0.5,
+	slidesPerView: 'auto',
+
+});
+
+swiperWidth = mySwiper.container[0].clientWidth
+maxTranslate = mySwiper.maxTranslate();
+maxWidth = -maxTranslate + swiperWidth / 2
+
+$(".swiper-container").on('touchstart', function(e) {
+	e.preventDefault()
+})
+
+mySwiper.on('tap', function(swiper, e) {
+//    console.log(swiper.clickedIndex)
+    pageSwiper.slideTo(swiper.clickedIndex, 1000, false);//跳转
+//	e.preventDefault()
+	slide = swiper.slides[swiper.clickedIndex]
+	slideLeft = slide.offsetLeft
+	slideWidth = slide.clientWidth
+	slideCenter = slideLeft + slideWidth / 2
+    console.log("slideLeft:"+slideLeft)
+    console.log("maxWidth:"+maxWidth)
+    console.log("slideCenter:"+slideCenter)
+	// 被点击slide的中心点
+	mySwiper.setWrapperTransition(300)
+	if (slideCenter < swiperWidth / 2) {
+		mySwiper.setWrapperTranslate(0)
+	} else if (slideCenter > maxWidth) {
+		mySwiper.setWrapperTranslate(maxTranslate)
+	} else {
+		nowTlanslate = slideCenter - swiperWidth / 2
+		mySwiper.setWrapperTranslate(-nowTlanslate)
+	}
+	$("#topNav  .active").removeClass('active')
+
+	$("#topNav .swiper-slide").eq(swiper.clickedIndex).addClass('active')
+
+})
+</script>
+
+
+</body>
+</html>
